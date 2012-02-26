@@ -8,35 +8,29 @@ public class GrafikKaestchen extends JButton {
 
 	private static final long serialVersionUID = 1L;
 
-	private static Spieler aktuellerSpieler = Spieler.KREUZ;
-	private Kaestchen kaestchen;
+	private final Spielbrett spielbrett;
+	private final int zeilennummer;
+	private final int spaltennummer;
+	private ActionListener listener = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			spielbrett.naechsterZugAufFeld(zeilennummer, spaltennummer);
+		}
+	};
 
 	public GrafikKaestchen(Spielbrett spielbrett, int zeilennummer,
 			int spaltennummer) {
-		kaestchen = spielbrett.get(zeilennummer, spaltennummer);
+		this.spielbrett = spielbrett;
+		this.zeilennummer = zeilennummer;
+		this.spaltennummer = spaltennummer;
 
-		this.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				kaestchen.set(aktuellerSpieler);
-				derNaechsteSpielerIstDran();
-			}
-		});
+		this.addActionListener(listener);
 
-	}
-
-	private void derNaechsteSpielerIstDran() {
-		if (aktuellerSpieler == Spieler.KREUZ) {
-			aktuellerSpieler = Spieler.KREIS;
-		} else
-		if (aktuellerSpieler == Spieler.KREIS) {
-			aktuellerSpieler = Spieler.KREUZ;
-		}
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		this.setText(kaestchen.get().toString());
+		this.setText(spielbrett.getSpieler(zeilennummer, spaltennummer).toString());
 	}
 
 }
