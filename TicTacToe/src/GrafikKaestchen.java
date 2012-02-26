@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class GrafikKaestchen extends JButton {
 
@@ -11,9 +12,16 @@ public class GrafikKaestchen extends JButton {
 	private final Spielbrett spielbrett;
 	private final int zeilennummer;
 	private final int spaltennummer;
+	
 	private ActionListener listener = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			spielbrett.naechsterZugAufFeld(zeilennummer, spaltennummer);
+			Spieler gewinner = spielbrett.werHatGewonnen();
+			if(gewinner == Spieler.LEER){
+				
+			} else {
+				JOptionPane.showMessageDialog(null, gewinner + " hat gewonnen!");
+			}
 		}
 	};
 
@@ -24,13 +32,13 @@ public class GrafikKaestchen extends JButton {
 		this.spaltennummer = spaltennummer;
 
 		this.addActionListener(listener);
-
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		this.setText(spielbrett.getSpieler(zeilennummer, spaltennummer).toString());
+		this.setText(spielbrett.getSpieler(zeilennummer, spaltennummer)
+				.toString());
 	}
 
 }
