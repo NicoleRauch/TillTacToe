@@ -1,8 +1,9 @@
-import Spieler._
+package scalaCode;
+import javaCode.ISpielbrett
+ 
+class Spielbrett extends ISpielbrett {
 
-class Spielbrett {
-
-  var aktuellerSpieler = Spieler.KREUZ;
+  var aktuellerSpieler : Spieler = Kreuz;
 
   val kaestchen = new Array[Array[Kaestchen]](3)
   kaestchen(0) = Array(new Kaestchen, new Kaestchen, new Kaestchen)
@@ -10,10 +11,14 @@ class Spielbrett {
   kaestchen(2) = Array(new Kaestchen, new Kaestchen, new Kaestchen)
 
   def naechsterZugAufFeld(zeilennummer: Int, spaltennummer: Int) = {
-    if (kaestchen(zeilennummer)(spaltennummer).get() == Spieler.LEER) {
+    if (kaestchen(zeilennummer)(spaltennummer).get() == Niemand) {
       kaestchen(zeilennummer)(spaltennummer).set(aktuellerSpieler);
       derNaechsteSpielerIstDran();
     }
+  }
+  
+  def sindAlleFelderBelegt = {
+	  (kaestchen(0) ++ kaestchen(1) ++ kaestchen(2)).filter(kaestchen => kaestchen.get() == Niemand).isEmpty
   }
 
   def werHatGewonnen = {
@@ -21,7 +26,7 @@ class Spielbrett {
 ++    untersucheZeilenAufGewinner
 ++    untersucheDiagonalenAufGewinner
 )
-    .filter(spieler => spieler != Spieler.LEER).headOption.getOrElse(Spieler.LEER)
+    .filter(spieler => spieler != Niemand).headOption.getOrElse(Niemand)
   }
 
   private def untersucheZeilenAufGewinner = {
@@ -36,7 +41,7 @@ class Spielbrett {
       kaestchen(zeilennummer)(1).get() ==
       kaestchen(zeilennummer)(2).get()) {
       kaestchen(zeilennummer)(0).get()
-    } else Spieler.LEER
+    } else Niemand
   }
 
   private def untersucheDiagonalenAufGewinner = {
@@ -50,7 +55,7 @@ class Spielbrett {
       kaestchen(1)(1).get() ==
       kaestchen(2)(2).get()) {
       kaestchen(2)(2).get()
-    } else Spieler.LEER
+    } else Niemand
   }
 
       private def untersucheDiagonale2AufGewinner = {
@@ -59,7 +64,7 @@ class Spielbrett {
 		  kaestchen(1)(1).get() ==
 			  kaestchen(2)(0).get()) {
 		  kaestchen(2)(0).get()
-	  } else Spieler.LEER
+	  } else Niemand
   }
 
   
@@ -75,14 +80,14 @@ class Spielbrett {
       kaestchen(1)(spaltennummer).get() ==
       kaestchen(2)(spaltennummer).get()) {
       kaestchen(0)(spaltennummer).get()
-    } else Spieler.LEER
+    } else Niemand
   }
 
   private def derNaechsteSpielerIstDran() {
-    if (aktuellerSpieler == Spieler.KREUZ) {
-      aktuellerSpieler = Spieler.KREIS;
-    } else if (aktuellerSpieler == Spieler.KREIS) {
-      aktuellerSpieler = Spieler.KREUZ;
+    if (aktuellerSpieler == Kreuz) {
+      aktuellerSpieler = Kreis;
+    } else if (aktuellerSpieler == Kreis) {
+      aktuellerSpieler = Kreuz;
     }
   }
 
@@ -100,7 +105,7 @@ class Spielbrett {
 }
 
 class Kaestchen {
-  var spieler = LEER
+  var spieler : Spieler = Niemand
 
   def get() = spieler
 

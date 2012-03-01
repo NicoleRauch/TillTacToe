@@ -1,15 +1,21 @@
+package java.nicole;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javaCode.ISpielbrett;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+
+import scalaCode.Niemand$;
+import scalaCode.Spieler;
+
 
 public class GrafikKaestchen extends JButton {
 
 	private static final long serialVersionUID = 1L;
 
-	private final Spielbrett spielbrett;
+	private final ISpielbrett spielbrett;
 	private final int zeilennummer;
 	private final int spaltennummer;
 	
@@ -17,15 +23,17 @@ public class GrafikKaestchen extends JButton {
 		public void actionPerformed(ActionEvent e) {
 			spielbrett.naechsterZugAufFeld(zeilennummer, spaltennummer);
 			Spieler gewinner = spielbrett.werHatGewonnen();
-			if(gewinner == Spieler.LEER){
-				
+			if(gewinner.getClass().equals(Niemand$.class)){
+				if(spielbrett.sindAlleFelderBelegt()){
+					JOptionPane.showMessageDialog(null, "Das Spiel ist unentschieden.");
+				}
 			} else {
 				JOptionPane.showMessageDialog(null, gewinner + " hat gewonnen!");
 			}
 		}
 	};
 
-	public GrafikKaestchen(Spielbrett spielbrett, int zeilennummer,
+	public GrafikKaestchen(ISpielbrett spielbrett, int zeilennummer,
 			int spaltennummer) {
 		this.spielbrett = spielbrett;
 		this.zeilennummer = zeilennummer;

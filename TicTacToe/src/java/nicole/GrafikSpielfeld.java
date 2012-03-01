@@ -1,15 +1,20 @@
+package java.nicole;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javaCode.ISpielbrett;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+
+import scalaCode.Spielbrett;
+
 
 public class GrafikSpielfeld extends JFrame {
 
@@ -43,7 +48,7 @@ public class GrafikSpielfeld extends JFrame {
 		getContentPane().setLayout(borderLayout);
 		JPanel spielfeld = new JPanel();
 		getContentPane().add(spielfeld, BorderLayout.CENTER);
-		Spielbrett spielbrett = new Spielbrett();
+		ISpielbrett spielbrett = new Spielbrett();
 
 		spielfeld.setLayout(new GridLayout(3, 3));
 		spielfeld.add(new GrafikKaestchen(spielbrett, 0, 0));
