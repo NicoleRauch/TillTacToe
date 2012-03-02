@@ -94,14 +94,6 @@ class Spielbrett extends ISpielbrett {
   def getSpieler(zeilennummer: Int, spaltennummer: Int) = {
     kaestchen(zeilennummer)(spaltennummer).get
   }
-
-  override def toString = {
-    gibZeileAus(0) + gibZeileAus(1) + gibZeileAus(2)
-  }
-
-  private def gibZeileAus(zeilennummer: Int): java.lang.String = {
-    kaestchen(zeilennummer)(0).toString + kaestchen(zeilennummer)(1) + kaestchen(zeilennummer)(2) + "\n"
-  }
 }
 
 class Kaestchen {
@@ -111,10 +103,6 @@ class Kaestchen {
 
   def set(neuerSpieler: Spieler) = {
     spieler = neuerSpieler
-  }
-
-  override def toString = {
-    " " + spieler + " "
   }
 }
 

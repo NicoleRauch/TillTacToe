@@ -17,6 +17,8 @@ import scalaCode.Spieler;
 
 public class UIField extends JPanel {
 
+	private static final long serialVersionUID = 1L;
+
 	private int offset = 15;
 	private final int zeilennummer;
 	private final int spaltennummer;

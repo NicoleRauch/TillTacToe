@@ -8,14 +8,11 @@ sealed trait Spieler {
 
 object Niemand extends Spieler {
   override def istNiemand = true
-  override def toString() = ""
 }
 object Kreuz extends Spieler {
   override def istKreuz = true
-  override def toString() = "X"
 }
 object Kreis extends Spieler {
   override def istKreis = true
-  override def toString() = "O" 
 }
 
