@@ -44,8 +44,7 @@ public class GrafikSpielfeld extends JFrame {
 	}
 
 	private void erzeugeFensterinhalt() {
-		BorderLayout borderLayout = new BorderLayout();
-		getContentPane().setLayout(borderLayout);
+		getContentPane().setLayout(new BorderLayout());
 		JPanel spielfeld = new JPanel();
 		getContentPane().add(spielfeld, BorderLayout.CENTER);
 		ISpielbrett spielbrett = new Spielbrett();
