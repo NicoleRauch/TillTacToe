@@ -5,20 +5,20 @@ class Spielbrett extends ISpielbrett {
 
   var aktuellerSpieler : Spieler = Kreuz;
 
-  val kaestchen = new Array[Array[Kaestchen]](3)
-  kaestchen(0) = Array(new Kaestchen, new Kaestchen, new Kaestchen)
-  kaestchen(1) = Array(new Kaestchen, new Kaestchen, new Kaestchen)
-  kaestchen(2) = Array(new Kaestchen, new Kaestchen, new Kaestchen)
+  val kaestchen = new Array[Array[Spieler]](3)
+  kaestchen(0) = Array(Niemand, Niemand, Niemand)
+  kaestchen(1) = Array(Niemand, Niemand, Niemand)
+  kaestchen(2) = Array(Niemand, Niemand, Niemand)
 
   def naechsterZugAufFeld(zeilennummer: Int, spaltennummer: Int) = {
-    if (kaestchen(zeilennummer)(spaltennummer).get() == Niemand) {
-      kaestchen(zeilennummer)(spaltennummer).set(aktuellerSpieler);
+    if (kaestchen(zeilennummer)(spaltennummer) == Niemand) {
+      kaestchen(zeilennummer)(spaltennummer) = aktuellerSpieler;
       derNaechsteSpielerIstDran();
     }
   }
   
   def sindAlleFelderBelegt = {
-	  (kaestchen(0) ++ kaestchen(1) ++ kaestchen(2)).filter(kaestchen => kaestchen.get() == Niemand).isEmpty
+	  (kaestchen(0) ++ kaestchen(1) ++ kaestchen(2)).filter(kaestchen => kaestchen == Niemand).isEmpty
   }
 
   def werHatGewonnen = {
@@ -36,11 +36,11 @@ class Spielbrett extends ISpielbrett {
   }
   
     private def untersucheZeileAufGewinner(zeilennummer: Int) = {
-    if (kaestchen(zeilennummer)(0).get() ==
-      kaestchen(zeilennummer)(1).get() &&
-      kaestchen(zeilennummer)(1).get() ==
-      kaestchen(zeilennummer)(2).get()) {
-      kaestchen(zeilennummer)(0).get()
+    if (kaestchen(zeilennummer)(0) ==
+      kaestchen(zeilennummer)(1) &&
+      kaestchen(zeilennummer)(1) ==
+      kaestchen(zeilennummer)(2)) {
+      kaestchen(zeilennummer)(0)
     } else Niemand
   }
 
@@ -50,20 +50,20 @@ class Spielbrett extends ISpielbrett {
   }
   
       private def untersucheDiagonale1AufGewinner = {
-    if (kaestchen(0)(0).get() ==
-      kaestchen(1)(1).get() &&
-      kaestchen(1)(1).get() ==
-      kaestchen(2)(2).get()) {
-      kaestchen(2)(2).get()
+    if (kaestchen(0)(0) ==
+      kaestchen(1)(1) &&
+      kaestchen(1)(1) ==
+      kaestchen(2)(2)) {
+      kaestchen(2)(2)
     } else Niemand
   }
 
       private def untersucheDiagonale2AufGewinner = {
-	  if (kaestchen(0)(2).get() ==
-		  kaestchen(1)(1).get() &&
-		  kaestchen(1)(1).get() ==
-			  kaestchen(2)(0).get()) {
-		  kaestchen(2)(0).get()
+	  if (kaestchen(0)(2) ==
+		  kaestchen(1)(1) &&
+		  kaestchen(1)(1) ==
+			  kaestchen(2)(0)) {
+		  kaestchen(2)(0)
 	  } else Niemand
   }
 
@@ -75,11 +75,11 @@ class Spielbrett extends ISpielbrett {
   }
 
   private def untersucheSpalteAufGewinner(spaltennummer: Int) = {
-    if (kaestchen(0)(spaltennummer).get() ==
-      kaestchen(1)(spaltennummer).get() &&
-      kaestchen(1)(spaltennummer).get() ==
-      kaestchen(2)(spaltennummer).get()) {
-      kaestchen(0)(spaltennummer).get()
+    if (kaestchen(0)(spaltennummer) ==
+      kaestchen(1)(spaltennummer) &&
+      kaestchen(1)(spaltennummer) ==
+      kaestchen(2)(spaltennummer)) {
+      kaestchen(0)(spaltennummer)
     } else Niemand
   }
 
@@ -92,17 +92,7 @@ class Spielbrett extends ISpielbrett {
   }
 
   def getSpieler(zeilennummer: Int, spaltennummer: Int) = {
-    kaestchen(zeilennummer)(spaltennummer).get
-  }
-}
-
-class Kaestchen {
-  var spieler : Spieler = Niemand
-
-  def get() = spieler
-
-  def set(neuerSpieler: Spieler) = {
-    spieler = neuerSpieler
+    kaestchen(zeilennummer)(spaltennummer)
   }
 }
 
