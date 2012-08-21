@@ -13,6 +13,7 @@ class SpielbrettTest extends FunSuite {
   test("Auf einem leeren Spielbrett hat keiner gewonnen") {
     val brett = new Spielbrett
     assert(brett.sindAlleFelderBelegt == false)
+    assert(brett.istDasSpielbrettLeer == true)
     assert(brett.werHatGewonnen == Niemand)
   }
 
@@ -24,6 +25,7 @@ class SpielbrettTest extends FunSuite {
     brett.naechsterZugAufFeld(0,2)
     brett.naechsterZugAufFeld(2,0)
     assert(brett.sindAlleFelderBelegt == false)
+    assert(brett.istDasSpielbrettLeer == false)
     assert(brett.werHatGewonnen == Kreuz)
   }
   
@@ -35,6 +37,7 @@ class SpielbrettTest extends FunSuite {
 	  brett.naechsterZugAufFeld(1,2)
 	  brett.naechsterZugAufFeld(2,1)
 	  assert(brett.sindAlleFelderBelegt == false)
+	  assert(brett.istDasSpielbrettLeer == false)
 	  assert(brett.werHatGewonnen == Kreuz)
   }
 
@@ -46,6 +49,7 @@ class SpielbrettTest extends FunSuite {
 	  brett.naechsterZugAufFeld(1,0)
 	  brett.naechsterZugAufFeld(2,2)
 	  assert(brett.sindAlleFelderBelegt == false)
+	  assert(brett.istDasSpielbrettLeer == false)
 	  assert(brett.werHatGewonnen == Kreuz)
   }
 
@@ -58,6 +62,7 @@ class SpielbrettTest extends FunSuite {
     brett.naechsterZugAufFeld(2,0)
     brett.naechsterZugAufFeld(0,2)
     assert(brett.sindAlleFelderBelegt == false)
+    assert(brett.istDasSpielbrettLeer == false)
     assert(brett.werHatGewonnen == Kreis)
   }
   
@@ -70,6 +75,7 @@ class SpielbrettTest extends FunSuite {
 	  brett.naechsterZugAufFeld(2,2)
 	  brett.naechsterZugAufFeld(1,2)
 	  assert(brett.sindAlleFelderBelegt == false)
+	  assert(brett.istDasSpielbrettLeer == false)
 	  assert(brett.werHatGewonnen == Kreis)
   }
 
@@ -82,6 +88,7 @@ class SpielbrettTest extends FunSuite {
 	  brett.naechsterZugAufFeld(1,0)
 	  brett.naechsterZugAufFeld(2,2)
 	  assert(brett.sindAlleFelderBelegt == false)
+	  assert(brett.istDasSpielbrettLeer == false)
 	  assert(brett.werHatGewonnen == Kreis)
   }
 
@@ -97,6 +104,7 @@ class SpielbrettTest extends FunSuite {
 	  brett.naechsterZugAufFeld(1,2)
 	  brett.naechsterZugAufFeld(0,2)
 	  assert(brett.sindAlleFelderBelegt == true)
+	  assert(brett.istDasSpielbrettLeer == false)
 	  assert(brett.werHatGewonnen == Niemand)
   }
 }
