@@ -13,12 +13,20 @@ class Spielbrett extends ISpielbrett {
   def getSpieler(zeilennummer: Int, spaltennummer: Int) = {
     kaestchen(zeilennummer)(spaltennummer)
   }
+  
+  def spieler(zug : (Int,Int)) = {
+    getSpieler(zug._1, zug._2)
+  }
 
   def naechsterZugAufFeld(zeilennummer: Int, spaltennummer: Int) = {
     if (kaestchen(zeilennummer)(spaltennummer) == Niemand) {
       kaestchen(zeilennummer)(spaltennummer) = aktuellerSpieler;
       derNaechsteSpielerIstDran();
     }
+  }
+  
+  def naechsterZugAuf(zug : (Int,Int)) = {
+    naechsterZugAufFeld(zug._1, zug._2)
   }
 
   def sindAlleFelderBelegt = {

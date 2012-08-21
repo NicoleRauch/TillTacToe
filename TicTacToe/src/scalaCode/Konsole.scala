@@ -6,16 +6,11 @@ object Konsole {
   def main(args: Array[String]) {
     val spielbrett = new Spielbrett();
     zeichneSpielbrett(spielbrett);
-    var zugnummer = 1
     
     while (spielbrett.werHatGewonnen() == Niemand && !spielbrett.sindAlleFelderBelegt()) {
-      if(zugnummer % 2 == 1){
-    	  fuehreSpielerZugAus(spielbrett)        
-      } else {
-    	  fuehreComputerZugAus(spielbrett)
-      }
-      zeichneSpielbrett(spielbrett)
-      zugnummer = zugnummer + 1
+    	fuehreSpielerZugAus(spielbrett)      
+    	fuehreComputerZugAus(spielbrett)
+    	zeichneSpielbrett(spielbrett)
     }
     
     if (!hatJemandGewonnen(spielbrett)) {
@@ -25,6 +20,7 @@ object Konsole {
 
   def fuehreComputerZugAus(spielbrett : Spielbrett) {
     val strategie = new AbwehrStrategie(spielbrett)
+    spielbrett.naechsterZugAuf(strategie.naechsterZug)
   }
   
   def zeichneSpielbrett(spielbrett: Spielbrett) {
@@ -66,7 +62,7 @@ object Konsole {
     if (spielbrett.werHatGewonnen() != Niemand) {
       println(symbol(spielbrett.werHatGewonnen()) + " hat gewonnen!")
       true
-    }
+    } else
     false
   }
 }
