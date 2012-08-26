@@ -6,23 +6,23 @@ object Konsole {
   def main(args: Array[String]) {
     val spielbrett = new Spielbrett();
     zeichneSpielbrett(spielbrett);
-    
+
     while (spielbrett.werHatGewonnen() == Niemand && !spielbrett.sindAlleFelderBelegt()) {
-    	fuehreSpielerZugAus(spielbrett)      
-    	fuehreComputerZugAus(spielbrett)
-    	zeichneSpielbrett(spielbrett)
+      fuehreSpielerZugAus(spielbrett)
+      fuehreComputerZugAus(spielbrett)
+      zeichneSpielbrett(spielbrett)
     }
-    
+
     if (!hatJemandGewonnen(spielbrett)) {
       println("Unentschieden...")
     }
   }
 
-  def fuehreComputerZugAus(spielbrett : Spielbrett) {
+  def fuehreComputerZugAus(spielbrett: Spielbrett) {
     val strategie = new AbwehrStrategie(spielbrett)
     spielbrett.naechsterZugAuf(strategie.naechsterZug)
   }
-  
+
   def zeichneSpielbrett(spielbrett: Spielbrett) {
     for (zeile <- 0 to 2) {
       for (spalte <- 0 to 2) {
@@ -58,12 +58,12 @@ object Konsole {
     spielbrett.naechsterZugAufFeld(zeile, spalte)
   }
 
-  private def hatJemandGewonnen(spielbrett: scalaCode.Spielbrett) = {
+  def hatJemandGewonnen(spielbrett: scalaCode.Spielbrett) = {
     if (spielbrett.werHatGewonnen() != Niemand) {
       println(symbol(spielbrett.werHatGewonnen()) + " hat gewonnen!")
       true
     } else
-    false
+      false
   }
 }
 

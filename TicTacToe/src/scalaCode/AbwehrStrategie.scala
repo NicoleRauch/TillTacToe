@@ -1,5 +1,4 @@
 package scalaCode
-import javaCode.ISpielbrett;
 import scala.util.Random
 
 class AbwehrStrategie(spielbrett: Spielbrett) {

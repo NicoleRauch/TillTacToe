@@ -1,5 +1,6 @@
 package scalaCode;
 import javaCode.ISpielbrett
+import javaCode.SpielbrettListener
 
 class Spielbrett extends ISpielbrett {
 
@@ -13,6 +14,8 @@ class Spielbrett extends ISpielbrett {
   var letzteZeile : Int = -1
   var letzteSpalte : Int = -1
   var letzterSpieler : Spieler = Niemand
+  
+  var listener : SpielbrettListener = null
   
   def getLetztenSpieler = letzterSpieler
   def getLetzteZeile = letzteZeile
@@ -33,6 +36,7 @@ class Spielbrett extends ISpielbrett {
       letzterSpieler = aktuellerSpieler
       kaestchen(zeilennummer)(spaltennummer) = aktuellerSpieler;
       derNaechsteSpielerIstDran();
+      listener.valueChangedAt(zeilennummer, spaltennummer, aktuellerSpieler);
     }
   }
   
@@ -114,6 +118,10 @@ class Spielbrett extends ISpielbrett {
     } else if (aktuellerSpieler == Kreis) {
       aktuellerSpieler = Kreuz;
     }
+  }
+  
+  def setListener(newListener : SpielbrettListener) = {
+    listener = newListener
   }
 }
 
