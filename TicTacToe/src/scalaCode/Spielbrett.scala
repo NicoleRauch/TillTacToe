@@ -9,6 +9,14 @@ class Spielbrett extends ISpielbrett {
   kaestchen(0) = Array(Niemand, Niemand, Niemand)
   kaestchen(1) = Array(Niemand, Niemand, Niemand)
   kaestchen(2) = Array(Niemand, Niemand, Niemand)
+  
+  var letzteZeile : Int = -1
+  var letzteSpalte : Int = -1
+  var letzterSpieler : Spieler = Niemand
+  
+  def getLetztenSpieler = letzterSpieler
+  def getLetzteZeile = letzteZeile
+  def getLetzteSpalte = letzteSpalte
 
   def getSpieler(zeilennummer: Int, spaltennummer: Int) = {
     kaestchen(zeilennummer)(spaltennummer)
@@ -20,6 +28,9 @@ class Spielbrett extends ISpielbrett {
 
   def naechsterZugAufFeld(zeilennummer: Int, spaltennummer: Int) = {
     if (kaestchen(zeilennummer)(spaltennummer) == Niemand) {
+      letzteZeile = zeilennummer
+      letzteSpalte = spaltennummer
+      letzterSpieler = aktuellerSpieler
       kaestchen(zeilennummer)(spaltennummer) = aktuellerSpieler;
       derNaechsteSpielerIstDran();
     }

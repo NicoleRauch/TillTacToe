@@ -12,4 +12,8 @@ public interface ISpielbrett {
 
 	Spieler getSpieler(int zeilennummer, int spaltennummer);
 
+	Spieler getLetztenSpieler();
+	int getLetzteZeile();
+	int getLetzteSpalte();
+
 }

@@ -1,4 +1,5 @@
 package scalaCode
+import javaCode.ISpielbrett;
 import scala.util.Random
 
 class AbwehrStrategie(spielbrett: Spielbrett) {
@@ -31,7 +32,7 @@ class AbwehrStrategie(spielbrett: Spielbrett) {
       Nil
   }
 
-  def drehen(wieOft: Int, zug: (Int, Int)): (Int, Int) = {
+def drehen(wieOft: Int, zug: (Int, Int)): (Int, Int) = {
     if (wieOft == 0) zug
     else if (wieOft == 1) drehen(zug)
     else if (wieOft == 2) drehen(drehen(zug))
@@ -60,6 +61,10 @@ class AbwehrStrategie(spielbrett: Spielbrett) {
       spalte = Random.nextInt(3)
     }
     (zeile, spalte)
+  }
+
+  def ziehe = {
+    spielbrett.naechsterZugAuf(naechsterZug);
   }
 
   def ich = {
